@@ -33,7 +33,7 @@
     <div class="col-md-10 col-lg-10 col-sm-12">
 
       <div class="form-inline justify-content-around">
-        <button class=" side-heading my-4 ml-4 btn btn-outline-info">Nuevo Repositorio</button>
+        <button class="side-heading my-4 ml-4 btn btn-outline-info">Nuevo Repositorio</button>
         <div class="input-group">
           <input type="text" class="form-control" #user placeholder="Nombre de usuario">
           <div class="input-group-prepend">
@@ -43,12 +43,20 @@
       </div>
 
       <div class="row my-4 mx-4">
-        <div class="col-md-4 col-lg-4 col-sm-12 mb-4">
-          <div class="card">
+        <div class="col-md-4 col-lg-4 col-sm-12 mb-4" *ngFor="let item of reposRes">
+          <div class="card mb-3 text-center shadow">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-block btn-info">Ver Repositorio</a>
+              <img [src]="item.owner.avatar_url" class="mb-3" alt="perfil" width="75" height="75">
+              <h5 class="card-title">{{item.name}}</h5>
+              <span class="badge badge-primary my-2" 
+                [ngClass]="{'badge-danger': item.language === 'HTML',
+                            'badge-warning': item.language === 'JavaScript',
+                            'badge-success': item.language === 'Python'
+                           }">
+                {{item.language}}
+              </span>
+              <p class="card-text">{{item.description}}</p>
+              <a [href]="item.html_url" target="blank" class="btn btn-block btn-info">Ver Repositorio</a>
             </div>
           </div>
         </div>
